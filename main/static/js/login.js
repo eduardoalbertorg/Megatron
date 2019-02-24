@@ -1,7 +1,6 @@
-new Vue({el: '#app'});
-
-export default {
-    data: () => ({
+new Vue({
+    el: '#app',
+    data: ({
         valid: true,
         username: '',
         username_rules: [
@@ -32,4 +31,4 @@ export default {
             this.$refs.form.resetValidation()
         }
     }
-}
+});

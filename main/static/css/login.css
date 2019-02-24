@@ -7,6 +7,11 @@
     color: white;
 }
 
+#register_button {
+    background-color: #C94545;
+    color: white;
+}
+
 #contact_email {
     color: white;
     text-decoration: underline;

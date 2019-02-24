@@ -25,15 +25,18 @@
                                     <img src="{% static "img/logo_TECMM.png" %}" height="150px" width="170px">
                                 </v-layout>
                                 <v-form>
-                                    <v-text-field required prepend-icon="person" name="login" label="Usuario"
+                                    <v-text-field required prepend-icon="person_outline" name="login" label="Usuario"
                                                   type="text" v-model="username" :counter="15"
                                                   :rules="username_rules"></v-text-field>
-                                    <v-text-field required prepend-icon="lock" name="password" label="Password"
+                                    <v-text-field required prepend-icon="lock_outline" name="password" label="Password"
                                                   id="password"
                                                   type="password" v-model="password" :counter="15"
                                                   :rules="password_rules"></v-text-field>
-                                    <v-btn id="login_button" color="#C94545" @click="login" outline
+                                    <v-btn id="login_button" color="#C94545" @click="login"
                                            class="btn active mt-3">Ingresar
+                                    </v-btn>
+                                    <v-btn id="register_button" color="#C94545" @click="login" outline
+                                           class="btn active mt-3">Registrar
                                     </v-btn>
                                 </v-form>
                             </div>

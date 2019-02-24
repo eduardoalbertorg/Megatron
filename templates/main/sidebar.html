@@ -18,16 +18,18 @@
         <v-card>
             <v-navigation-drawer permanent app>
                 <v-layout align-center justify-center>
-                    <img src="{% static "img/logo_TECMM.png" %}" height="100px" width="100px">
+                    <a href="/">
+                        <img src="{% static "img/logo_TECMM.png" %}" height="100px" width="100px">
+                    </a>
                 </v-layout>
                 <v-toolbar flat class="transparent">
                     <v-list class="pa-0">
-                        <v-list-tile avatar>
+                        <v-list-tile avatar href="/perfil" class="tile">
                             <v-list-tile-avatar>
                                 <v-icon>person_outline</v-icon>
                             </v-list-tile-avatar>
                             <v-list-tile-content>
-                                <v-list-tile-title>Profesor Jirafales</v-list-tile-title>
+                                <v-list-tile-title >Profesor Jirafales</v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
                     </v-list>
@@ -42,7 +44,7 @@
                             <v-list-tile-title>Pagina principal</v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
-                    <v-list-tile @click="" href="incidencia" class="tile">
+                    <v-list-tile @click="" href="/incidencia" class="tile">
                         <v-list-tile-action>
                             <v-icon>calendar_today</v-icon>
                         </v-list-tile-action>
@@ -69,10 +71,10 @@
                 </v-list>
             </v-navigation-drawer>
             <v-content>
-                <v-container>
+
                     {% block content %}
                     {% endblock %}
-                </v-container>
+
             </v-content>
 
         </v-card>
