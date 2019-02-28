@@ -26,18 +26,59 @@
                                 </v-layout>
                                 <v-form>
                                     <v-text-field required prepend-icon="person_outline" name="login" label="Usuario"
-                                                  type="text" v-model="username" :counter="15"
-                                                  :rules="username_rules"></v-text-field>
-                                    <v-text-field required prepend-icon="lock_outline" name="password" label="Password"
-                                                  id="password"
-                                                  type="password" v-model="password" :counter="15"
-                                                  :rules="password_rules"></v-text-field>
-                                    <v-btn id="login_button" color="#C94545" @click="login"
+                                                  type="text" :counter="15"></v-text-field>
+                                    <v-text-field id="password" required prepend-icon="lock_outline" name="password"
+                                                  label="Password"
+                                                  type="password" :counter="15"></v-text-field>
+                                    <v-btn id="login_button" color="#C94545" @click=""
                                            class="btn active mt-3">Ingresar
                                     </v-btn>
-                                    <v-btn id="register_button" color="#C94545" @click="login" outline
+                                    <v-btn id="register_button" color="#C94545" @click.stop="dialog = true" outline
                                            class="btn active mt-3">Registrar
                                     </v-btn>
+                                    <v-dialog v-model="dialog" persistent max-width="600px">
+                                        <v-card>
+                                            <v-card-title>
+                                                <span class="headline">Registro</span>
+                                            </v-card-title>
+                                            <v-card-text>
+                                                <v-container grid-list-md>
+                                                    <v-layout wrap>
+                                                        <v-flex xs12 sm6 md4>
+                                                            <v-text-field label="Nombre*"
+                                                                          required></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12 sm6 md4>
+                                                            <v-text-field
+                                                                    label="Apellido*"
+                                                                    required
+                                                            ></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12>
+                                                            <v-text-field
+                                                                    label="Nombre de usuario*"
+                                                                    required
+                                                            ></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12>
+                                                            <v-text-field label="Email*" required></v-text-field>
+                                                        </v-flex>
+                                                        <v-flex xs12>
+                                                            <v-text-field label="Password*" type="password"
+                                                                          required></v-text-field>
+                                                        </v-flex>
+                                                    </v-layout>
+                                                </v-container>
+                                                <small>*Campos obligatorios</small>
+                                            </v-card-text>
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+                                                <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+
                                 </v-form>
                             </div>
                         </div>
@@ -55,6 +96,8 @@
             </v-layout>
         </v-container>
     </v-content>
+
+
 </div>
 
 
