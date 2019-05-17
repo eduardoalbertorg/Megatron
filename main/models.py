@@ -23,13 +23,13 @@ class EmployeeAccount(models.Model):
     passwordReminderToken (str):
     passwordReminderExpiration (str):
     """
-    username = models.CharField(max_length=100)
-    email = models.CharField(max_length=254)
+    username = models.CharField(unique=True, max_length=100)
+    email = models.CharField(unique=True, max_length=254)
     password = models.CharField(max_length=200)
-    passwordSalt = models.CharField(max_length=50)
-    passwordHashAlgorithm = models.CharField(max_length=50)
-    passwordReminderToken = models.CharField(max_length=100)
-    passwordReminderExpiration = models.DateTimeField()
+    passwordSalt = models.CharField(blank=True, null=True, max_length=50)
+    passwordHashAlgorithm = models.CharField(blank=True, null=True, max_length=50)
+    passwordReminderToken = models.CharField(blank=True, null=True, max_length=100)
+    passwordReminderExpiration = models.DateTimeField(blank=True, null=True)
 
 
 class Employee(models.Model):
@@ -80,7 +80,7 @@ class IncidenceType(models.Model):
     name (str): Incidence's name
     description (str): Small description of the incidence
     """
-    name = models.CharField(max_length=200)
+    name = models.CharField(unique=True, max_length=200)
     description = models.CharField(max_length=250)
 
 
@@ -120,7 +120,7 @@ class Work(models.Model):
     """
     workTypeID = models.ForeignKey(WorkType, on_delete=models.CASCADE)
     startDate = models.DateField()
-    endDate = models.DateTimeField()
+    endDate = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField()
 
 
