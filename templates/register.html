@@ -25,19 +25,27 @@
                                 <v-layout align-center justify-center>
                                     <img src="{% static "img/logo_TECMM.png" %}" height="150px" width="170px">
                                 </v-layout>
-                                <v-form>
-                                    <v-text-field required prepend-icon="person_outline" name="login" label="Usuario"
-                                                  type="text" :counter="15"></v-text-field>
-                                    <v-text-field id="password" required prepend-icon="lock_outline" name="password"
-                                                  label="Password"
-                                                  type="password" :counter="15"></v-text-field>
-                                    <v-btn id="login_button" color="#C94545" @click=""
-                                           class="btn active mt-3">Ingresar
-                                    </v-btn>
-                                    <v-btn id="register_button" color="#C94545" href="/register/" outline
+                                <form method="POST">
+                                    {% if messages %}
+                                        {% for mesage in messages %}
+                                            <div class="alert alert-{{ message.tags }}">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% csrf_token %}
+                                    <fieldset class="form-group">
+                                        {{ form|crispy }}
+                                    </fieldset>
+                                    <div class="form-group">
+                                        <v-btn id="register_button" color="#C94545" type="submit"
                                            class="btn active mt-3">Registrar
-                                    </v-btn>
-                                </v-form>
+                                        </v-btn>
+                                        <v-btn id="register_button" color="#C94545" href="/login/" outline
+                                               class="btn active mt-3">Volver al inicio
+                                        </v-btn>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div id="rectangle" class="card text-white py-5 d-md-down-none">
