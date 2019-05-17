@@ -35,14 +35,14 @@ def login(request):
 
 
 def register(request):
-    print("Register funct")
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            # To obtain the username after it is valid
             username = form.cleaned_data.get('username')
-            messages.success(request, f"Account created for {username}!")
-            return redirect('main:homepage')
+            messages.success(request, f"Se ha creado tu cuenta.")
+            return redirect('main:login')
     else:
         form = UserRegisterForm()
     return render(request=request,
