@@ -1,37 +1,34 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
 
 
 # Create your views here.
+
+
+@login_required
 def homepage(request):
     return render(request=request,
                   template_name='main/home.html')
 
 
+@login_required
 def contact(request):
     return render(request=request,
                   template_name='main/contact.html')
 
 
+@login_required
 def incidence(request):
     return render(request=request,
                   template_name='main/incidence.html')
 
 
+@login_required
 def profile(request):
     return render(request=request,
                   template_name='main/profile.html')
-
-
-def login(request):
-
-    return render(request=request,
-                  template_name='login.html',
-                  context={'form': form})
 
 
 def register(request):

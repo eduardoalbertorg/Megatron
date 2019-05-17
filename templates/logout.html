@@ -1,0 +1,10 @@
+{% extends 'base_login_register.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h4>Te has salido del sistema</h4>
+    <div class="border-top pt-3">
+        <small>
+            <a href="/login">Iniciar sesion de nuevo</a>
+        </small>
+    </div>
+{% endblock %}
