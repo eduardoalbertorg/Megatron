@@ -12,36 +12,13 @@ class Clocks(models.Model):
     ip = models.CharField(max_length=16)
 
 
-class EmployeeAccount(models.Model):
-    """
-    Model to save the employee's account information, and includes a security measure to recover password
-
-    username (str): Employee's username
-    password (str): Employee's password
-    passwordSalt (str):
-    passwordHashAlgorithm (str): Stores the algorithm's name for reference
-    passwordReminderToken (str):
-    passwordReminderExpiration (str):
-    """
-    username = models.CharField(unique=True, max_length=100)
-    email = models.CharField(unique=True, max_length=254)
-    password = models.CharField(max_length=200)
-    passwordSalt = models.CharField(blank=True, null=True, max_length=50)
-    passwordHashAlgorithm = models.CharField(blank=True, null=True, max_length=50)
-    passwordReminderToken = models.CharField(blank=True, null=True, max_length=100)
-    passwordReminderExpiration = models.DateTimeField(blank=True, null=True)
-
-
 class Employee(models.Model):
     """
     Model with Employee's general information
 
-    name (str): Employee's name
-    lastname (str): Employee's lastname
+    full_name (str): Employee's full name since the clock registers it this way
     """
-    employeeAccountID = models.ForeignKey(EmployeeAccount, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    lastname = models.CharField(max_length=200)
+    full_name = models.CharField(max_length=200)
 
 
 class AttendanceRecord(models.Model):
@@ -51,7 +28,7 @@ class AttendanceRecord(models.Model):
     employeeID (int): Reference to the employee
     register (DateTime): Complete timestamp of the record
     """
-    employeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     register = models.DateTimeField()
 
 
@@ -64,10 +41,10 @@ class Payroll(models.Model):
     startDate (Date): Payroll's starting date
     endDate (Date): Payroll's ending date
     """
-    employeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    hoursDeducted = models.PositiveSmallIntegerField()
-    startDate = models.DateField()
-    endDate = models.DateTimeField()
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    hours_deducted = models.PositiveSmallIntegerField()
+    start_date = models.DateField()
+    end_date = models.DateTimeField()
 
 
 class IncidenceType(models.Model):
@@ -93,8 +70,8 @@ class Incidence(models.Model):
     incidenceTypeID (int): Reference to the type of incidence
     date (Date): Marks the day that the incidence was made
     """
-    employeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    incidenceTypeID = models.ForeignKey(IncidenceType, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    incidence_type = models.ForeignKey(IncidenceType, on_delete=models.CASCADE)
     date = models.DateField()
 
 
@@ -113,14 +90,14 @@ class Work(models.Model):
     """
     Model to track the period of time of lectures, and once a semester finishes it's archived with completed flag
 
-    workTypeID (int): Stablishes if the work was a lecture or office job
-    startDate (Date): Indicates the starting date for the lecture or office job
-    endDate (Date): Marks the ending date for the lecture; if it's a office job it should be blank or a future date
+    work_type (int): (ID)Stablishes if the work was a lecture or office job
+    start_date (Date): Indicates the starting date for the lecture or office job
+    end_date (Date): Marks the ending date for the lecture; if it's a office job it should be blank or a future date
     completed (bool): Indicates if the lecture was completed; semester ended so we don't query these anymore
     """
-    workTypeID = models.ForeignKey(WorkType, on_delete=models.CASCADE)
-    startDate = models.DateField()
-    endDate = models.DateTimeField(blank=True, null=True)
+    work_type = models.ForeignKey(WorkType, on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField()
 
 
@@ -140,10 +117,10 @@ class WorkSchedule(models.Model):
     startTime (DateTime): Lecture's starting hour
     endTime (DateTime): Lecture's ending hour
     """
-    employeeID = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    workID = models.ForeignKey(Work, on_delete=models.CASCADE)
-    startTime = models.DateTimeField()
-    endTime = models.DateTimeField()
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    work = models.ForeignKey(Work, on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     weekday = models.PositiveSmallIntegerField()
 
 
