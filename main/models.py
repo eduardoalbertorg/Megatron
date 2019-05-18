@@ -18,7 +18,7 @@ class Employee(models.Model):
 
     full_name (str): Employee's full name since the clock registers it this way
     """
-    full_name = models.CharField(max_length=200)
+    full_name = models.CharField(unique=True, max_length=200)
 
 
 class AttendanceRecord(models.Model):
