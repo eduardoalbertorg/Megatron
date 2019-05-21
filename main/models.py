@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # TODO: Create models for logs once a incidence is modified, etc.
@@ -18,7 +19,11 @@ class Employee(models.Model):
 
     full_name (str): Employee's full name since the clock registers it this way
     """
-    full_name = models.CharField(unique=True, max_length=200)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_employee_name = models.CharField(unique=True, max_length=200)
+
+    def __str__(self):
+        return f'{self.full_employee_name}'
 
 
 class AttendanceRecord(models.Model):
