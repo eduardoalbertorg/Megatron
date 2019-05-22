@@ -34,7 +34,16 @@ class AttendanceRecord(models.Model):
     register (DateTime): Complete timestamp of the record
     """
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    register = models.DateTimeField()
+    attendance_record = models.DateTimeField()
+
+
+class UnidentifiedAttendanceRecord(models.Model):
+    """
+    Model that contains the attendance record of unidentified or not created employees for the time being
+
+    """
+    full_name = models.CharField(unique=True, max_length=200)
+    attendance_record = models.DateTimeField()
 
 
 class Payroll(models.Model):
