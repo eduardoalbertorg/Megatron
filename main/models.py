@@ -24,7 +24,7 @@ class Employee(models.Model):
     code = models.CharField(unique=True, max_length=10)
 
     def __str__(self):
-        return f'{self.full_employee_name}'
+        return f'{self.full_name}'
 
 
 class AttendanceRecord(models.Model):
