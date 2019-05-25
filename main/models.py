@@ -20,7 +20,8 @@ class Employee(models.Model):
     full_name (str): Employee's full name since the clock registers it this way
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_employee_name = models.CharField(unique=True, max_length=200)
+    full_name = models.CharField(unique=True, max_length=200)
+    code = models.CharField(unique=True, max_length=10)
 
     def __str__(self):
         return f'{self.full_employee_name}'
@@ -37,12 +38,19 @@ class AttendanceRecord(models.Model):
     attendance_record = models.DateTimeField()
 
 
+class UnidentifiedEmployee(models.Model):
+    """
+    Model that contains the unidentified or unregistered employee's information
+    """
+    full_name = models.CharField(unique=True, max_length=200)
+
+
 class UnidentifiedAttendanceRecord(models.Model):
     """
     Model that contains the attendance record of unidentified or not created employees for the time being
 
     """
-    full_name = models.CharField(unique=True, max_length=200)
+    unidentified_employee = models.ForeignKey(UnidentifiedEmployee, on_delete=models.CASCADE, default=None)
     attendance_record = models.DateTimeField()
 
 
