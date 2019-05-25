@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Megatron.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': {
         'rest_framework.authentication.TokenAuthentication',
-'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     },
 }
 
@@ -94,7 +94,7 @@ DATABASES = {
         'PASSWORD': 'passw0rd',
         'HOST': 'localhost',
         'PORT': '5432',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

@@ -38,22 +38,6 @@ class AttendanceRecord(models.Model):
     attendance_record = models.DateTimeField()
 
 
-class UnidentifiedEmployee(models.Model):
-    """
-    Model that contains the unidentified or unregistered employee's information
-    """
-    full_name = models.CharField(unique=True, max_length=200)
-
-
-class UnidentifiedAttendanceRecord(models.Model):
-    """
-    Model that contains the attendance record of unidentified or not created employees for the time being
-
-    """
-    unidentified_employee = models.ForeignKey(UnidentifiedEmployee, on_delete=models.CASCADE, default=None)
-    attendance_record = models.DateTimeField()
-
-
 class Payroll(models.Model):
     """
     Model that links the payroll with the employee and the time period it covers
