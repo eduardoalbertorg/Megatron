@@ -1,9 +1,10 @@
-var main_vue = new Vue({
-    el: '#side_bar',
-    type: 'month',
-    start: '',
-    end: '',
+new Vue({
+    el: '#app',
     data: {
+        mainHeaders: [
+            { text: 'Registro', value: 'attendance_record' },
+        ],
+        attendance_records: [],
         items: [
             {title: 'Home', icon: 'dashboard'},
             {title: 'About', icon: 'question_answer'}
@@ -11,5 +12,6 @@ var main_vue = new Vue({
         type: 'month',
         start: '',
         end: '',
-    }
+    },
+
 });

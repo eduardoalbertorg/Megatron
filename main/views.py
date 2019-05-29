@@ -26,6 +26,12 @@ def incidence(request):
 
 
 @login_required
+def attendance_record(request):
+    return render(request=request,
+                  template_name='main/attendance_records.html')
+
+
+@login_required
 def profile(request):
     return render(request=request,
                   template_name='main/profile.html')

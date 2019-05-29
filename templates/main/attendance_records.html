@@ -1,0 +1,19 @@
+{% extends "main/sidebar.html" %}
+
+{% block content %}
+
+    <h1>Registros del checador</h1>
+    <v-container fill-height>
+        <v-layout wrap>
+            <v-data-table
+            :headers="mainHeaders"
+            :items="attendance_records"
+            class="elevation-1"
+            >
+                <template v-slot:items="props">
+                  <td class="text-xs-right">a</td>
+                </template>
+            </v-data-table>
+        </v-layout>
+    </v-container>
+{% endblock %}
