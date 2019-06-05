@@ -1,4 +1,6 @@
-from main.api.viewsets import EmployeeViewSet, AttendanceRecordViewSet, IncidenceViewSet
+from main.api.viewsets import EmployeeViewSet
+from main.api.viewsets import AttendanceRecordViewSet
+from main.api.viewsets import IncidenceViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()

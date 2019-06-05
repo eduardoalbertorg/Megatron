@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from rest_framework.authtoken import token_views
+from rest_framework.authtoken import views as token_views
 from . import views as main_views
 from .router import router
 

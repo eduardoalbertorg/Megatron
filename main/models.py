@@ -40,7 +40,8 @@ class AttendanceRecord(models.Model):
 
 class Payroll(models.Model):
     """
-    Model that links the payroll with the employee and the time period it covers
+    Model that links the payroll with the employee
+    and the time period it covers
 
     employeeID (int): Reference to the employee
     hoursDeducted (int): The hours that were deducted from the payroll
@@ -55,7 +56,9 @@ class Payroll(models.Model):
 
 class IncidenceType(models.Model):
     """
-    NOTE: This is a reference table/model, it doesn't create more rows than the HR's rules for incidences
+    NOTE: This is a reference table/model, it doesn't create more
+    rows than the HR's rules for incidences
+
     Model to determine the type of incidences:
     0-10 mins -> Small incident
     11-15 mins -> Medium incidence
@@ -69,7 +72,8 @@ class IncidenceType(models.Model):
 
 class Incidence(models.Model):
     """
-    Model that holds track/records of all the incidences that were made by the employee. Then when a new payroll is
+    Model that holds track/records of all the incidences that
+    were made by the employee. Then when a new payroll is
     generated, it'll make a query and stablish the employee's discounted hours
 
     employeeID (int): Reference to the employee
@@ -94,12 +98,16 @@ class WorkType(models.Model):
 
 class Work(models.Model):
     """
-    Model to track the period of time of lectures, and once a semester finishes it's archived with completed flag
+    Model to track the period of time of lectures,
+    and once a semester finishes it's archived with completed flag
 
     work_type (int): (ID)Stablishes if the work was a lecture or office job
-    start_date (Date): Indicates the starting date for the lecture or office job
-    end_date (Date): Marks the ending date for the lecture; if it's a office job it should be blank or a future date
-    completed (bool): Indicates if the lecture was completed; semester ended so we don't query these anymore
+    start_date (Date): Indicates the starting date for
+    the lecture or office job
+    end_date (Date): Marks the ending date for the lecture;
+    if it's a office job it should be blank or a future date
+    completed (bool): Indicates if the lecture was completed;
+    semester ended so we don't query these anymore
     """
     work_type = models.ForeignKey(WorkType, on_delete=models.CASCADE)
     start_date = models.DateField()
@@ -128,5 +136,3 @@ class WorkSchedule(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     weekday = models.PositiveSmallIntegerField()
-
-

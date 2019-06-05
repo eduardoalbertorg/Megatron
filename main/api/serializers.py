@@ -3,19 +3,19 @@ from rest_framework import serializers
 from main.models import Employee, AttendanceRecord, Incidence
 
 
-class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
+class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ('full_name', 'code')
+        fields = '__all__'
 
 
-class AttendanceRecordSerializer(serializers.HyperlinkedModelSerializer):
+class AttendanceRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttendanceRecord
-        fields = ('employee', 'attendance_record')
+        fields = '__all__'
 
 
-class IncidenceSerializer(serializers.HyperlinkedModelSerializer):
+class IncidenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Incidence
-        fields = ('employee', 'incidence_type', 'date')
+        fields = '__all__'

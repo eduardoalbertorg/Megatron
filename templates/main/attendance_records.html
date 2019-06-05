@@ -5,15 +5,26 @@
     <h1>Registros del checador</h1>
     <v-container fill-height>
         <v-layout wrap>
+            
+            <b-table striped hover :items="desserts"></b-table>
+
+            <!-- <td v-for="(attendance, index) in attendance_records">{{ index }}</td> -->
+            
+            
             <v-data-table
-            :headers="mainHeaders"
-            :items="attendance_records"
+            :headers="headers"
+            :items="desserts"
             class="elevation-1"
             >
-                <template v-slot:items="props">
-                  <td class="text-xs-right">a</td>
+                <template slot="items" slot-scope="desserts">
+                    <tr>
+                        <td>{{desserts.item.name}}</td>
+                        <td>{{ props }}</td>
+                    </tr>
                 </template>
+                
             </v-data-table>
+            
         </v-layout>
     </v-container>
 {% endblock %}
