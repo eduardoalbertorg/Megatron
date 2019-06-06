@@ -12,16 +12,14 @@ new Vue({
     }),
     methods: {
         getAttendanceRecords() {
-            const path = 'http://localhost:8000/api/attendance-records/?format=json'
+            const path = 'http://127.0.0.1:8000/api/attendance-records/'
             axios.get(path).then((response) => {
                 this.attendance_records = response.data;
-              })
-              .catch(function (error) {
+            }).catch(function (error) {
                 console.log(error);
-              })
-              .then(function () {
+            }).then(function () {
                 // always executed
-              });  
+            });  
         }
     },
     created() {
