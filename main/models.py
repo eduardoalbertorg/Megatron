@@ -111,7 +111,7 @@ class Work(models.Model):
     """
     work_type = models.ForeignKey(WorkType, on_delete=models.CASCADE)
     start_date = models.DateField()
-    end_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
     completed = models.BooleanField()
 
 
