@@ -45,3 +45,13 @@ class IncidenceViewSet(viewsets.ModelViewSet):
     """
     queryset = Incidence.objects.all()
     serializer_class = IncidenceSerializer
+    authentication_classes = (SessionAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the incidences
+        for the currently authenticated user.
+        """
+        user = self.request.user
+        return Incidence.objects.filter(employee=user.employee)

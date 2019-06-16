@@ -43,15 +43,24 @@ class Payroll(models.Model):
     Model that links the payroll with the employee
     and the time period it covers
 
-    employeeID (int): Reference to the employee
-    hoursDeducted (int): The hours that were deducted from the payroll
     startDate (Date): Payroll's starting date
     endDate (Date): Payroll's ending date
     """
+    start_date = models.DateField(unique=True)
+    end_date = models.DateField(unique=True)
+
+
+class HoursDeducted(models.Model):
+    """
+    Model to link the hours deducted form each payroll to the employee
+
+    employee (int): Reference to the employee class/table
+    payroll (int): Reference to the payroll class/table
+    hoursDeducted (int): The hours that were deducted from the payroll
+    """
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE)
     hours_deducted = models.PositiveSmallIntegerField()
-    start_date = models.DateField()
-    end_date = models.DateTimeField()
 
 
 class IncidenceType(models.Model):
@@ -85,42 +94,19 @@ class Incidence(models.Model):
     date = models.DateField()
 
 
-class WorkType(models.Model):
+class Schedule(models.Model):
     """
-    Model to determine if it was a lecture or office work
+    Model to get the time period when classes were instructed
 
-    name (str): Lecture's name. E.g.: Principios electricos
-    description (str): A brief description
-    """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=512)
-
-
-class Work(models.Model):
-    """
-    Model to track the period of time of lectures,
-    and once a semester finishes it's archived with completed flag
-
+    employeeID (int): Reference to the employee
     work_type (int): (ID)Stablishes if the work was a lecture or office job
+    work_schedule (int): (ID)Reference to the schedule it followed
     start_date (Date): Indicates the starting date for
     the lecture or office job
     end_date (Date): Marks the ending date for the lecture;
     if it's a office job it should be blank or a future date
     completed (bool): Indicates if the lecture was completed;
     semester ended so we don't query these anymore
-    """
-    work_type = models.ForeignKey(WorkType, on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField(blank=True, null=True)
-    completed = models.BooleanField()
-
-
-class WorkSchedule(models.Model):
-    """
-    Model to get the time period when classes were instructed
-
-    employeeID (int): Reference to the employee
-    workTypeID (int): Stablishes if the work was a lecture or office job
     weekday (int): Saves a positive integer value to link between a weekday:
                     Monday = 0
                     Tuesday = 1
@@ -128,11 +114,13 @@ class WorkSchedule(models.Model):
                     Thursday = 3
                     Friday = 4
                     Saturday = 5
-    startTime (DateTime): Lecture's starting hour
-    endTime (DateTime): Lecture's ending hour
+    startTime (Time): Office, Guard, or Lecture's starting hour
+    endTime (Time): Office, Guard, or Lecture's ending hour
     """
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    work = models.ForeignKey(Work, on_delete=models.CASCADE)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
     weekday = models.PositiveSmallIntegerField()
+    completed = models.BooleanField()
