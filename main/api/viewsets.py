@@ -1,5 +1,7 @@
-from main.models import Employee, Incidence, AttendanceRecord
-from .serializers import EmployeeSerializer
+from main.models import Employee
+from main.models import AttendanceRecord
+from main.models import Incidence
+from main.models import IncidenceType
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
@@ -7,6 +9,7 @@ from rest_framework.authentication import SessionAuthentication
 from main.api.serializers import EmployeeSerializer
 from main.api.serializers import AttendanceRecordSerializer
 from main.api.serializers import IncidenceSerializer
+from main.api.serializers import IncidenceTypeSerializer
 
 
 # groups a set of views to:
@@ -37,6 +40,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     """
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    authentication_classes = (SessionAuthentication, )
+    permission_classes = (IsAuthenticated, )
 
 
 class IncidenceViewSet(viewsets.ModelViewSet):
@@ -45,3 +50,23 @@ class IncidenceViewSet(viewsets.ModelViewSet):
     """
     queryset = Incidence.objects.all()
     serializer_class = IncidenceSerializer
+    authentication_classes = (SessionAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the incidences
+        for the currently authenticated user.
+        """
+        user = self.request.user
+        return Incidence.objects.filter(employee=user.employee)
+
+
+class IncidenceTypeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows incidence types to be viewed
+    """
+    queryset = IncidenceType.objects.all()
+    serializer_class = IncidenceTypeSerializer
+    authentication_classes = (SessionAuthentication, )
+    permission_classes = (IsAuthenticated, )

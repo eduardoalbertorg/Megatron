@@ -13,12 +13,48 @@
         <v-flex xs12 class="mb-3">
             <v-sheet height="500">
                 <v-calendar
-                        ref="calendar"
-                        v-model="start"
-                        :type="type"
-                        :end="end"
-                        color="primary"
-                ></v-calendar>
+                    ref="calendar"
+                    v-model="start"
+                    :type="type"
+                    :end="end"
+                    color="primary"
+                >
+                    <template v-slot:day="{ date }">
+                        <template v-for="incidence in incidencesMap[date]">
+                            <v-menu
+                                :key="incidence.type"
+                                v-model="incidence.window_state"
+                                full-width
+                                offset-x
+                                v-if="incidence.type !== 'ASISTENCIA'"
+                            >
+                                <template v-slot:activator="{ on }">
+                                    <div
+                                        v-if="!incidence.time"
+                                        v-ripple
+                                        class="incidence_event"
+                                        v-on="on"
+                                        v-html="incidence.type"
+                                    ></div>
+                                </template>
+                                <v-card color="grey lighten-4" min-width="350px" flat>
+                                    <v-toolbar color="primary" dark>
+                                        <v-toolbar-title v-html="incidence.type"></v-toolbar-title>
+                                        <v-spacer></v-spacer>
+                                    </v-toolbar>
+                                    <v-card-title primary-title>
+                                        <span v-html="incidence.description"></span>
+                                    </v-card-title>
+                                    <v-card-actions>
+                                        <v-btn flat color="secondary">
+                                            CERRAR
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-menu>
+                        </template>
+                    </template>
+                </v-calendar>
             </v-sheet>
         </v-flex>
         <v-flex sm4 xs12 class="text-sm-left text-xs-center">
